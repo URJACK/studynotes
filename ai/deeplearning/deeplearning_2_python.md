@@ -174,7 +174,9 @@ array([[19, 22],
        [43, 50]])
 ```
 
-### 高级功能-求和
+### 高级功能
+
+#### sum求和
 
 ```
 >>> a
@@ -192,6 +194,145 @@ array([4, 6])
 >>> np.sum(a,axis=1) #行求和
 array([3, 7])
 ```
+
+#### stack
+
+这是一个让人有些疑惑的函数
+
+```python
+import numpy as np
+
+x1 = np.arange(9).reshape((3, 3))
+x2 = np.arange(10, 19, 1).reshape((3, 3))
+
+print(x1.shape)
+print(x2.shape)
+
+y2 = np.stack((x1, x2), axis=0)
+
+print(y2.shape)
+print(y2[0].shape)  # x1
+print(y2[1].shape)  # x2
+print(y2)
+```
+
+```
+(3, 3)
+(3, 3)
+(2, 3, 3)
+(3, 3)
+(3, 3)
+[[[ 0  1  2]
+  [ 3  4  5]
+  [ 6  7  8]]
+
+ [[10 11 12]
+  [13 14 15]
+  [16 17 18]]]
+```
+
+我们发现当axis=0的时候，整个流程是非常清晰的。只需要取y[0]就可以访问到x1，y[1]就可以访问到x2
+
+```
+y[0][a][b] = x1[a][b]
+y[1][a][b] = x2[a][b]
+```
+
+那如果axis等于其他数值呢?
+
+```python
+y3 = np.stack((x1, x2), axis=1)
+
+print(y3.shape)
+print(y3)
+```
+
+```
+(3, 2, 3)
+[[[ 0  1  2]
+  [10 11 12]]
+
+ [[ 3  4  5]
+  [13 14 15]]
+
+ [[ 6  7  8]
+  [16 17 18]]]
+```
+
+```
+由上述条件可知，当y3[a][0][b] == x1[a][b]
+```
+
+```python
+y4 = np.stack((x1, x2), axis=2)
+print(y4.shape)
+print(y4)
+```
+
+```
+(3, 3, 2)
+[[[ 0 10]
+  [ 1 11]
+  [ 2 12]]
+
+ [[ 3 13]
+  [ 4 14]
+  [ 5 15]]
+
+ [[ 6 16]
+  [ 7 17]
+  [ 8 18]]]
+```
+
+```python
+同理可推 y4[a][b][0] = x1[a][b]
+y4[a][b][1] = x2[a][b]
+axis = 2 对于这个初始都是"二维"的x来说，已经是最大的axis了
+```
+
+#### squeeze
+
+这个方法可以很快的清除掉数组的所有维度信息
+
+```python
+import numpy as np
+
+print("x1--------")
+x1 = np.arange(3).reshape((1, 3))
+print(x1.shape)
+print(x1)
+print("x2--------")
+x2 = np.squeeze(x1)
+print(x2.shape)
+print(x2)
+print("x3--------")
+x3 = np.arange(3).reshape((3, 1))
+print(x3.shape)
+print(x3)
+print("x4--------")
+x4 = np.squeeze(x3)
+print(x4.shape)
+print(x4)
+```
+
+```
+x1--------
+(1, 3)
+[[0 1 2]]
+x2--------
+(3,)
+[0 1 2]
+x3--------
+(3, 1)
+[[0]
+ [1]
+ [2]]
+x4--------
+(3,)
+[0 1 2]
+```
+
+squeeze之后元素，就向量化了
 
 ## Matplotlib
 

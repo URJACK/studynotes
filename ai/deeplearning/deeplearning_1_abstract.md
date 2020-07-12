@@ -235,3 +235,48 @@ settings->Project: demo->Project Interpreter->...
 
 如果之前配好了**解释器**，现在应该不用再配解释器了，因为那个信息应该会默认采用过来，但是保险起见，configure中的解释器必须也一致和之前配置的解释器一致
 
+## 额外模块的安装
+
+### slim
+
+slim库，在tensorFlow的高版本中以及tensorflow2中，已经不在官方库中了，使用其中的函数需要单独安装slim
+
+```shell
+pip install tf_slim
+```
+
+```python
+import tf_slim as slim
+```
+
+### future
+
+```
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+```
+
+```
+如果你在main.py中写import string,那么在Python 2.4或之前, Python会先查找当前目录下有没有string.py, 若找到了，则引入该模块，然后你在main.py中可以直接用string了。如果你是真的想用同目录下的string.py那就好，但是如果你是想用系统自带的标准string.py呢？那其实没有什么好的简洁的方式可以忽略掉同目录的string.py而引入系统自带的标准string.py。这时候你就需要from __future__ import absolute_import了。这样，你就可以用import string来引入系统的标准string.py, 而用from pkg import string来引入当前目录下的string.py了
+```
+
+```
+导入python未来支持的语言特征division(精确除法)，当我们没有在程序中导入该特征时，"/"操作符执行的是截断除法(Truncating Division),当我们导入精确除法之后，"/"执行的是精确除法。
+>>> 3/4
+0
+>>> from __future__ import division
+>>> 3/4
+0.75
+导入精确除法后，若要执行截断除法，可以使用"//"操作符：
+--------------------------------------------------------------------------------------------
+>>> 3//4
+0
+>>> 
+```
+
+```
+from __future__ import print_function
+在开头加上这句之后，即使在python2.X，使用print就得像python3.X那样加括号使用。python2.X中print不需要括号，而在python3.X中则需要。
+```
+
