@@ -184,7 +184,8 @@ pip config set global.index-url http://pypi.douban.com/simple/
 TensorFlow
 
 ```
-pip install tensorflow-gpu=2.0.0 
+pip install tensorflow-gpu==1.13.1
+pip install matplotlib==2.2.2
 ```
 
 测试代码
