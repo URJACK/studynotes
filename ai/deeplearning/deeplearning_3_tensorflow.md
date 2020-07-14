@@ -461,3 +461,53 @@ sess.close()
 64.0
 ```
 
+## TensorFlow模型的保存与提取
+
+模型的保存（fileA.py）
+
+```python
+saver = tf.train.Saver()
+saver.save(sess, "D:\\Storage\\pycharmProjects\\demo\\gan\\model\\dcgan.ckpt")
+g = tf.get_default_graph()
+tf.summary.FileWriter('D:\\Storage\\pycharmProjects\\demo\\graph', g)
+```
+
+模型的提取（fileB.py）
+
+在这个文件中，不必重新用大量的代码去定义图
+
+```python
+# 提取模型
+sess = tf.Session()
+saver = tf.train.import_meta_graph('D:\\Storage\\pycharmProjects\\demo\\gan\\model\\dcgan.ckpt.meta')
+saver.restore(sess, "D:\\Storage\\pycharmProjects\\demo\\gan\\model\\dcgan.ckpt")
+
+# 取得图，并根据变量名字取得对应的tensor
+g = tf.get_default_graph()
+inputs_fake = g.get_tensor_by_name("generator/tanh:0")
+input_ph = g.get_tensor_by_name("inputdata:0")
+
+# 定义运行session必要的一个inputHolder
+inputHolder = np.random.rand(128, 784)
+
+# 运行
+fake_imgs = sess.run(inputs_fake, feed_dict={input_ph: inputHolder})
+imgs_numpy = deprocess_img(fake_imgs)
+show_images(imgs_numpy[:16])
+plt.show()
+```
+
+如何查看对应的tensor名称呢？
+
+```python
+# .............截取代码...................
+
+print(input_ph) # 打印这个tensor名称
+
+sess = tf.Session()
+sess.run(tf.global_variables_initializer())
+print(inputs_fake) # 打印这个tensor名称
+
+# .............截取代码...................
+```
+

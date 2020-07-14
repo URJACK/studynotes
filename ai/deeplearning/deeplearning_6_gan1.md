@@ -24,7 +24,7 @@ $$
 photo_{input}(28*28)->128->64->12->3->12->64->128->photo_{output}(28*28)
 $$
 
-![dp_6_1](D:\LearningNotes\ai\deeplearning\dp_6_1.png)
+![dp_6_1](.\dp_6_1.png)
 
 损失函数如下
 
@@ -34,17 +34,17 @@ opt = tf.train.AdamOptimizer(1e-3)
 opt.minimize(loss)
 ```
 
-![dp_6_2](D:\LearningNotes\ai\deeplearning\dp_6_2.png)
+![dp_6_2](.\dp_6_2.png)
 
 借助工具，让之前浓缩到三维的向量可视化。
 
 经过一次网络的搭建，我们就得到了自动编码器，使用其解码器部分就可以得出图片，但是这样的图片可能是不清晰的。
 
-![image-20200710161802153](D:\LearningNotes\ai\deeplearning\dp_6_3.png)
+![image-20200710161802153](.\dp_6_3.png)
 
 以下是新的代码
 
-![dp_6_4](D:\LearningNotes\ai\deeplearning\dp_6_4.png)
+![dp_6_4](.\dp_6_4.png)
 
 ### 总结
 
@@ -58,9 +58,9 @@ opt.minimize(loss)
 
 所以我们想要让code的分布尽可能的趋近正态分布。
 
-![dp_6_5](D:\LearningNotes\ai\deeplearning\dp_6_5.png)
+![dp_6_5](.\dp_6_5.png)
 
-![dp_6_6](D:\LearningNotes\ai\deeplearning\dp_6_6.png)
+![dp_6_6](.\dp_6_6.png)
 
 ## 生成对抗网络（GAN）
 
@@ -98,15 +98,15 @@ GAN由两部分组成
 
 训练之前
 
-![image-20200713095307843](D:\LearningNotes\ai\deeplearning\dp_6_9.png)
+![image-20200713095307843](.\dp_6_9.png)
 
 训练结果的如下
 
-![dp_6_7](D:\LearningNotes\ai\deeplearning\dp_6_7.png)
+![dp_6_7](.\dp_6_7.png)
 
 被训练图片如下
 
-![image-20200713095058239](D:\LearningNotes\ai\deeplearning\dp_6_8.png)
+![image-20200713095058239](.\dp_6_8.png)
 
 可以看出针对图片的时候，即是多次训练，效果也未必能有太大的好转
 
@@ -286,15 +286,15 @@ for e in range(10):
 
 ### 深度卷积对抗神经网络(DCGAN)
 
-![dp_6_13](D:\LearningNotes\ai\deeplearning\dp_6_13.png)
+![dp_6_13](.\dp_6_13.png)
 
 仅仅1000次
 
-![image-20200713103449416](D:\LearningNotes\ai\deeplearning\dp_6_10.png)
+![image-20200713103449416](.\dp_6_10.png)
 
 4000次
 
-![image-20200713103719840](D:\LearningNotes\ai\deeplearning\dp_6_11.png)
+![image-20200713103719840](.\dp_6_11.png)
 
 相较于之前的网络，构造代码仅需要更改两处
 
