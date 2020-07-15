@@ -185,12 +185,12 @@ TensorFlow
 
 ```
 pip install tensorflow-gpu==1.13.1
-pip install matplotlib==2.2.2
+pip install matplotlib==2.2.5
 ```
 
 测试代码
 
-```
+```python
 import tensorflow as tf
 
 A = tf.constant([[1, 2], [3, 4]])
@@ -198,6 +198,10 @@ B = tf.constant([[5, 6], [7, 8]])
 C = tf.matmul(A, B)
 
 print(C)
+
+
+print(tf.test.is_built_with_cuda())
+print(tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None))
 ```
 
 ## Pycharm 安装
