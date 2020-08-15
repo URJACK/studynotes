@@ -2,18 +2,12 @@
 
 ## 依赖
 
-老师的课程中，使用的是TensorFlow 1，而我使用的是TensorFlow 2。所以有一些属性是用不了的，比如tf.Session()。
-
-为了解决问题，再引用TensorFlow的时候，应该使用该段代码
-
 ```
-import tensorflow.compat.v1 as tf
-tf.disable_eager_execution()
+matplotlib           2.2.5
+tensorflow-gpu       1.13.1
+numpy                1.18.5
+h5py                 2.10.0
 ```
-
-eager 模式是在 TF 1.4 版本之后引入的，据相关报道：在 TF 2.0(预计 18 年年底发布) 之后将会把 eager 模式变为默认执行模式；
-
-
 
 ## 运行机制
 
