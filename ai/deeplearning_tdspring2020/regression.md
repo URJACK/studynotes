@@ -1,4 +1,4 @@
-# Regression
+# 台大课程1-Regression
 
 以预测宝可梦的CP值为例子，记录下基础的回归原理。
 
