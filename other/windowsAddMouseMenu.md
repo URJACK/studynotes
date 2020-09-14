@@ -18,9 +18,9 @@ regedit
 
 ### 具体操作
 
-![image-20200716111428685](.\1.png)
+![image-20200716111428685](.\windowsAddMouseMenu\1.png)
 
-![image-20200716111837034](.\2.png)
+![image-20200716111837034](.\windowsAddMouseMenu\2.png)
 
 ### 添加内容
 
@@ -50,18 +50,21 @@ C:\Program Files\WindowsApps\Microsoft.WindowsTerminal_1.0.1811.0_x64__8wekyb3d8
 
 ### 第一次打开属性，设置用户
 
-![image-20200716113231733](.\3.png)
+![image-20200716113231733](.\windowsAddMouseMenu\3.png)
 
-![image-20200716113325112](.\4.png)
+![image-20200716113325112](.\windowsAddMouseMenu\4.png)
 
-![image-20200716113409089](.\5.png)
+![image-20200716113409089](.\windowsAddMouseMenu\5.png)
 
-![image-20200716113509893](.\6.png)
+![image-20200716113509893](.\windowsAddMouseMenu\6.png)
 
-![image-20200716113629793](.\7.png)
+![image-20200716113629793](.\windowsAddMouseMenu\7.png)
 
-![image-20200716113726597](.\8.png)
+![image-20200716113726597](.\windowsAddMouseMenu\8.png)
 
 ### 第二次打开属性，设置用户权限
 
-![image-20200716113842432](.\9.png)
+![image-20200716113842432](.\windowsAddMouseMenu\9.png)
+
+## 直接使用本路径下的setVisualStudioCode.reg
+
