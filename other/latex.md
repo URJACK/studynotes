@@ -29,7 +29,7 @@
 
 ---
 
-![image-20200913105600928](D:\LearningNotes\other\image-20200913105600928.png)
+![image-20200913105600928](.\latex\image-20200913105600928.png)
 
 篡改其中的一些内容
 
@@ -52,7 +52,7 @@
 
 ---
 
-![image-20200913105918898](D:\LearningNotes\other\image-20200913105918898.png)
+![image-20200913105918898](.\latex\image-20200913105918898.png)
 
 #### part1 结论theoremstyle
 
@@ -70,7 +70,7 @@
 
 得到的结果是
 
-![image-20200913110028329](D:\LearningNotes\other\image-20200913110028329.png)
+![image-20200913110028329](.\latex\image-20200913110028329.png)
 
 #### part2 结论newtheorem 
 
@@ -80,7 +80,7 @@
 
 新设立一种风格newtheoremstyle
 
-![image-20200913110601533](D:\LearningNotes\other\image-20200913110601533.png)
+![image-20200913110601533](.\latex\image-20200913110601533.png)
 $$
 G=argmin_GE_{z-q(z)}[h(avg(E(G(z)))) - λp(z,E(G(z)))]
 $$

@@ -30,3 +30,18 @@ import project.demos.demo
 (py37) D:\Storage\pycharmProjects\pythonLearn>python -m project.demos.demo
 ```
 
+### 方案3：
+
+对于方案2来说，必须使用python作为命令行的触发程序。
+
+但是对于爬虫scrapy来说却不适用，
+
+在这里，可以引入absolute_import来解决问题
+
+```python
+# 原来的python的引入scrapy 的类中的方法有误，请用这个方法再次引入
+from __future__ import absolute_import
+
+import scrapy
+from ..items import DianzikedaspidersItem
+```
