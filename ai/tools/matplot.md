@@ -20,6 +20,15 @@ import matplotlib.pyplot as plt
 from matplotlib import style
 ```
 
+## 中文乱码解决
+
+```python
+# 在我的 notebook 里，要设置下面两行才能显示中文
+plt.rcParams['font.family'] = ['sans-serif']
+# 如果是在 PyCharm 里，只要下面一行，上面的一行可以删除
+plt.rcParams['font.sans-serif'] = ['SimHei']
+```
+
 ## 实例代码-折线图(plot)
 
 ### Demo1-基础图
