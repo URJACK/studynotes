@@ -11,6 +11,24 @@
 
 2. 在 `editor` 中，使用 `run -> activate` ，可以将脚本代码**运行激活**。
 
+### 背景常量
+
+- `se.sics.cooja.Mote mote` The Mote [Mote.java]()
+- `int id` The id of the mote
+- `long time` The current time
+- `String msg` The message
+- `se.sics.cooja.Simulation sim` The simulation [Simulation.java]()
+- `se.sics.cooja.Gui gui` The GUI [Gui.java]()
+- `interface ScriptLog log`
+- `log(String log)`
+- `public void testOK()`
+- `public void testFailed()`
+- `public void generateMessage(long delay, String msg)` This generates a message after delay. This can be used to wait without having a mote to output anything.
+- `boolean TIMEOUT` Set to true when the script times out
+- `boolean SHUTDOWN` Set to true when the script is deactivated
+- `java.util.concurrent.Semaphore.Semaphore SEMAPHORE_SCRIPT`
+- `java.util.concurrent.Semaphore.Semaphore SEMAPHORE_SIM`
+
 ## 代码解析
 
 详细script推荐的文档，参照contiki-os的官方wiki：

@@ -8,7 +8,7 @@
 `~\tools\collect-view\src\se\sics\contiki\collect\CollectServer.java``
 ``~\tools\collect-view\src\se\sics\contiki\collect\SensorData.java`
 
-![image-20210322142327832](.\imgs_8\image-20210322142327832.png)
+![image-20210322142327832](.\imgs_9\image-20210322142327832.png)
 
 从首页上，我们看出这一共有8个大选项卡。
 
@@ -22,7 +22,7 @@
 
 在Sensor Map下，你可以看到父子节点之间的这种连接关系，如下图所示。
 
-![image-20210322142759713](.\imgs_8\image-20210322142759713.png)
+![image-20210322142759713](.\imgs_9\image-20210322142759713.png)
 
 事实上，当你点开Network Graph后，看到的效果也是完全一样的，所以我也不是非常清楚为什么这需要单独设置两个选项卡。
 

@@ -188,6 +188,24 @@ public static SensorData parseSensorData(CollectServer server, String line, long
 
 ![image-20210328160813379](.\imgs_7\image-20210328160813379.png)
 
+<u>需要特别注意id字段</u>：
+
+假设传输了 `30 0 64 0 1285 ....`
+
+`1285`显然就是NODE_ID，那么这个`1285`如何和我们真实的节点相对应起来呢？答案如下：
+
+```java
+  public static String mapNodeID(int nodeID) {
+    return "" + (nodeID & 0xff) + '.' + ((nodeID >> 8) & 0xff);
+  }
+```
+
+或许也不太明显，结合这个图就一目了然了：
+
+![image-20210330233909603](.\imgs_7\image-20210330233909603.png)
+
+也就是1285，对应的节点，就是5号节点。使用代码访问，则需要使用 `var node = sim.getMotes()[4]`。
+
 #### Node
 
 尽管，从逻辑上讲，先理完“Instantaneous Power”后，紧接着讲“Average Power”似乎更为合适，但是经过短暂的代码分析后，我还是认为此时，应该先解析Node类。以下是Node类的成员变量。

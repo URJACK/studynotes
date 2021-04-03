@@ -12,6 +12,179 @@ contiki系统的udpsender，本代码分析从udp-sender.c开始。
 显然每个代码又都是实现了rpl的逻辑，那必然意味着每个代码都引用了<u>RPL的相关代码</u>。
 经过整理，得出"rpl.h"与"of.h"等等文件的逻辑关系。
 
+下面是文件编译的信息，这体现了文件的先后顺序。
+
+     [java]  INFO [AWT-EventQueue-0] (CompileContiki.java:140) - > make udp-sender.sky TARGET=sky 
+     [java] 
+     [java] COMPILATION OUTPUT:
+     [java] 
+     [java] 
+     [java] > make udp-sender.sky TARGET=sky 
+     [java] mkdir obj_sky
+     [java]   CC        ../../../core/net/rime/rimeaddr.c
+     [java]   CC        ../../../core/net/rime/timesynch.c
+     [java]   CC        ../../../core/net/rime/rimestats.c
+     [java]   CC        ../../../core/net/mac/cxmac.c
+     [java]   CC        ../../../core/net/mac/xmac.c
+     [java] ../../../core/net/mac/xmac.c: In function ‘send_packet’:
+     [java] ../../../core/net/mac/xmac.c:457:7: warning: variable ‘ret’ set but not used [-Wunused-but-set-variable]
+     [java]   CC        ../../../core/net/mac/nullmac.c
+     [java]   CC        ../../../core/net/mac/lpp.c
+     [java] ../../../core/net/mac/lpp.c: In function ‘input_packet’:
+     [java] ../../../core/net/mac/lpp.c:783:7: warning: variable ‘ret’ set but not used [-Wunused-but-set-variable]
+     [java]   CC        ../../../core/net/mac/frame802154.c
+     [java]   CC        ../../../core/net/mac/sicslowmac.c
+     [java]   CC        ../../../core/net/mac/nullrdc.c
+     [java] ../../../core/net/mac/nullrdc.c: In function ‘packet_input’:
+     [java] ../../../core/net/mac/nullrdc.c:288:12: warning: variable ‘original_dataptr’ set but not used [-Wunused-but-set-variable]
+     [java] ../../../core/net/mac/nullrdc.c:287:7: warning: variable ‘original_datalen’ set but not used [-Wunused-but-set-variable]
+     [java]   CC        ../../../core/net/mac/nullrdc-noframer.c
+     [java]   CC        ../../../core/net/mac/mac.c
+     [java]   CC        ../../../core/net/mac/framer-nullmac.c
+     [java]   CC        ../../../core/net/mac/framer-802154.c
+     [java]   CC        ../../../core/net/mac/csma.c
+     [java]   CC        ../../../core/net/mac/contikimac.c
+     [java] ../../../core/net/mac/contikimac.c: In function ‘powercycle’:
+     [java] ../../../core/net/mac/contikimac.c:386:27: warning: variable ‘t0’ set but not used [-Wunused-but-set-variable]
+     [java] ../../../core/net/mac/contikimac.c: In function ‘send_packet’:
+     [java] ../../../core/net/mac/contikimac.c:766:11: warning: variable ‘ret’ set but not used [-Wunused-but-set-variable]
+     [java] ../../../core/net/mac/contikimac.c:544:11: warning: variable ‘is_reliable’ set but not used [-Wunused-but-set-variable]
+     [java]   CC        ../../../core/net/mac/phase.c
+     [java]   CC        ../../../core/net/rpl/rpl.c
+     [java]   CC        ../../../core/net/rpl/rpl-dag.c
+     [java]   CC        ../../../core/net/rpl/rpl-icmp6.c
+     [java]   CC        ../../../core/net/rpl/rpl-timers.c
+     [java]   CC        ../../../core/net/rpl/rpl-mrhof.c
+     [java]   CC        ../../../core/net/rpl/rpl-ext-header.c
+     [java]   CC        ../../../core/sys/process.c
+     [java]   CC        ../../../core/sys/procinit.c
+     [java]   CC        ../../../core/sys/autostart.c
+     [java]   CC        ../../../core/loader/elfloader.c
+     [java]   CC        ../../../core/sys/profile.c
+     [java]   CC        ../../../core/sys/timetable.c
+     [java]   CC        ../../../core/sys/timetable-aggregate.c
+     [java]   CC        ../../../core/sys/compower.c
+     [java]   CC        ../../../core/dev/serial-line.c
+     [java]   CC        ../../../core/lib/memb.c
+     [java]   CC        ../../../core/lib/mmem.c
+     [java]   CC        ../../../core/sys/timer.c
+     [java]   CC        ../../../core/lib/list.c
+     [java]   CC        ../../../core/sys/etimer.c
+     [java]   CC        ../../../core/sys/ctimer.c
+     [java]   CC        ../../../core/sys/energest.c
+     [java]   CC        ../../../core/sys/rtimer.c
+     [java]   CC        ../../../core/sys/stimer.c
+     [java]   CC        ../../../core/lib/trickle-timer.c
+     [java]   CC        ../../../core/lib/print-stats.c
+     [java]   CC        ../../../core/lib/ifft.c
+     [java]   CC        ../../../core/lib/crc16.c
+     [java]   CC        ../../../core/lib/random.c
+     [java]   CC        ../../../core/lib/checkpoint.c
+     [java]   CC        ../../../core/lib/ringbuf.c
+     [java]   CC        ../../../core/lib/settings.c
+     [java]   CC        ../../../core/net/dhcpc.c
+     [java]   CC        ../../../core/net/hc.c
+     [java]   CC        ../../../core/net/nbr-table.c
+     [java]   CC        ../../../core/net/netstack.c
+     [java]   CC        ../../../core/net/packetbuf.c
+     [java]   CC        ../../../core/net/packetqueue.c
+     [java]   CC        ../../../core/net/psock.c
+     [java]   CC        ../../../core/net/queuebuf.c
+     [java]   CC        ../../../core/net/resolv.c
+     [java] ../../../core/net/resolv.c: In function ‘mdns_write_announce_records’:
+     [java] ../../../core/net/resolv.c:509:22: warning: variable ‘ans’ set but not used [-Wunused-but-set-variable]
+     [java] ../../../core/net/resolv.c: In function ‘mdns_prep_host_announce_packet’:
+     [java] ../../../core/net/resolv.c:606:22: warning: unused variable ‘ans’ [-Wunused-variable]
+     [java]   CC        ../../../core/net/sicslowpan.c
+     [java]   CC        ../../../core/net/simple-udp.c
+     [java]   CC        ../../../core/net/tcpdump.c
+     [java]   CC        ../../../core/net/tcpip.c
+     [java]   CC        ../../../core/net/uaodv-rt.c
+     [java] ../../../core/net/uaodv-rt.c: In function ‘uaodv_rt_lookup_any’:
+     [java] ../../../core/net/uaodv-rt.c:98:5: warning: implicit declaration of function ‘memcmp’ [-Wimplicit-function-declaration]
+     [java]   CC        ../../../core/net/uaodv.c
+     [java] ../../../core/net/uaodv.c: In function ‘fwc_lookup’:
+     [java] ../../../core/net/uaodv.c:91:3: warning: implicit declaration of function ‘memcmp’ [-Wimplicit-function-declaration]
+     [java]   CC        ../../../core/net/uip-debug.c
+     [java]   CC        ../../../core/net/uip-ds6-route.c
+     [java]   CC        ../../../core/net/uip-ds6-nbr.c
+     [java]   CC        ../../../core/net/uip-ds6.c
+     [java]   CC        ../../../core/net/uip-fw-drv.c
+     [java]   CC        ../../../core/net/uip-fw.c
+     [java]   CC        ../../../core/net/uip-icmp6.c
+     [java]   CC        ../../../core/net/uip-nd6.c
+     [java]   CC        ../../../core/net/uip-neighbor.c
+     [java]   CC        ../../../core/net/uip-over-mesh.c
+     [java]   CC        ../../../core/net/uip-packetqueue.c
+     [java]   CC        ../../../core/net/uip-split.c
+     [java]   CC        ../../../core/net/uip-udp-packet.c
+     [java]   CC        ../../../core/net/uip.c
+     [java]   CC        ../../../core/net/uip6.c
+     [java]   CC        ../../../core/net/uip_arp.c
+     [java]   CC        ../../../core/net/uiplib.c
+     [java]   CC        ../../../core/sys/mt.c
+     [java]   CC        ../../../core/dev/nullradio.c
+     [java]   CC        ../../../apps/powertrace/powertrace.c
+     [java]   CC        ../../../apps/collect-view/collect-view.c
+     [java]   CC        ../../../apps/collect-view/collect-view-sky.c
+     [java]   CC        ../../../platform/sky/./contiki-sky-platform.c
+     [java]   CC        ../../../core/dev/sht11.c
+     [java] ../../../core/dev/sht11.c: In function ‘sht11_init’:
+     [java] ../../../core/dev/sht11.c:218:4: warning: #warning SHT11: DISABLING I2C BUS [-Wcpp]
+     [java]   CC        ../../../core/dev/sht11-sensor.c
+     [java]   CC        ../../../platform/sky/dev/light-sensor.c
+     [java]   CC        ../../../platform/sky/dev/battery-sensor.c
+     [java]   CC        ../../../platform/sky/dev/button-sensor.c
+     [java]   CC        ../../../platform/sky/dev/radio-sensor.c
+     [java]   CC        ../../../cpu/msp430/f1xxx/spi.c
+     [java]   CC        ../../../core/dev/ds2411.c
+     [java]   CC        ../../../platform/sky/dev/xmem.c
+     [java]   CC        ../../../platform/sky/dev/i2c.c
+     [java]   CC        ../../../platform/sky/./node-id.c
+     [java]   CC        ../../../core/lib/sensors.c
+     [java]   CC        ../../../core/cfs/cfs-coffee.c
+     [java]   CC        ../../../core/dev/cc2420.c
+     [java] ../../../core/dev/cc2420.c: In function ‘flushrx’:
+     [java] ../../../core/dev/cc2420.c:188:11: warning: variable ‘dummy’ set but not used [-Wunused-but-set-variable]
+     [java] ../../../core/dev/cc2420.c: In function ‘cc2420_transmit’:
+     [java] ../../../core/dev/cc2420.c:356:11: warning: variable ‘total_len’ set but not used [-Wunused-but-set-variable]
+     [java]   CC        ../../../core/dev/cc2420-aes.c
+     [java]   CC        ../../../cpu/msp430/./cc2420-arch.c
+     [java]   CC        ../../../cpu/msp430/./cc2420-arch-sfd.c
+     [java] ../../../cpu/msp430/./cc2420-arch-sfd.c: In function ‘cc2420_timerb1_interrupt’:
+     [java] ../../../cpu/msp430/./cc2420-arch-sfd.c:44:7: warning: variable ‘tbiv’ set but not used [-Wunused-but-set-variable]
+     [java]   CC        ../../../platform/sky/dev/sky-sensors.c
+     [java]   CC        ../../../cpu/msp430/./uip-ipchksum.c
+     [java]   CC        ../../../platform/sky/./checkpoint-arch.c
+     [java]   CC        ../../../cpu/msp430/f1xxx/uart1.c
+     [java]   CC        ../../../cpu/msp430/./slip_uart1.c
+     [java]   CC        ../../../cpu/msp430/dev/uart1-putchar.c
+     [java]   CC        ../../../core/lib/me.c
+     [java]   CC        ../../../core/lib/me_tabs.c
+     [java]   CC        ../../../core/dev/slip.c
+     [java]   CC        ../../../cpu/msp430/f1xxx/msp430.c
+     [java]   CC        ../../../cpu/msp430/./flash.c
+     [java]   CC        ../../../cpu/msp430/f1xxx/clock.c
+     [java]   CC        ../../../core/dev/leds.c
+     [java]   CC        ../../../cpu/msp430/./leds-arch.c
+     [java]   CC        ../../../cpu/msp430/./watchdog.c
+     [java]   CC        ../../../cpu/msp430/./lpm.c
+     [java]   CC        ../../../cpu/msp430/./mtarch.c
+     [java]   CC        ../../../cpu/msp430/f1xxx/rtimer-arch.c
+     [java]   CC        ../../../core/loader/elfloader-msp430.c
+     [java]   CC        ../../../core/loader/symtab.c
+     [java]   CC        symbols.c
+     [java]   AR        contiki-sky.a
+     [java]   CC        udp-sender.c
+     [java] udp-sender.c: In function ‘collect_common_send’:
+     [java] udp-sender.c:140:9: warning: passing argument 1 of ‘rpl_get_parent_rank’ from incompatible pointer type [enabled by default]
+     [java] In file included from udp-sender.c:34:0:
+     [java] ../../../core/./net/rpl/rpl.h:247:12: note: expected ‘struct uip_lladdr_t *’ but argument is of type ‘union rimeaddr_t *’
+     [java]   CC        collect-common.c
+     [java]   CC        ../../../platform/sky/./contiki-sky-main.c
+     [java]   LD        udp-sender.sky
+     [java] rm udp-sender.co obj_sky/collect-common.o obj_sky/contiki-sky-main.o
+     [java] 
 ## udp-sender.c
 
 ### 全局变量与声明进程
@@ -261,4 +434,3 @@ void rpl_init(void)
 #endif
 }
 ```
-
